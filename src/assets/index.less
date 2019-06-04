@@ -1,0 +1,218 @@
+.coll{
+  padding-top: 10px;font-size:18px;
+  color: #bbb;width:40px;text-align: center;
+  border-right: 5px solid #333;
+}
+.left{
+  background:#272F3E url('../assets/bg.png') no-repeat bottom 40px center;
+  text-align: center;
+  color: #BBC1CB;
+  height: 100%;
+  .tree{
+    font-size: 16px;
+    height: 40px;padding-right: 15px;
+    line-height:40px;
+    text-align: left;
+    cursor: pointer;
+    padding-left:10px;
+    border-bottom: 1px solid #4d4d4d;
+    background-color: #1E2431;
+    span{
+
+      float: right;
+      font-size: 14px;
+      color: #bbb;
+    }
+    .file {
+      position: relative;
+      display: inline-block;
+      margin-left: 10px;
+      margin-top: 11px;
+      cursor: pointer;
+      background:url("../assets/wenjianjia.svg") no-repeat;
+      height:16px;
+      width: 16px;
+      input[type='file'] {
+        position: absolute;
+        -webkit-appearance: none;
+        width: 100%;
+        height: 16px;
+        opacity: 0;
+      }
+    }
+  }
+  .note{
+    width: 100%;font-size: 14px;
+    text-align: left;
+    li{
+      height: 35px;line-height: 35px;padding-right: 15px;padding-left:40px;
+      .textName{
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+      span{
+        display: inline-block;
+      }
+      input{
+        width:80%;display: inline-block;
+        padding-left: 5px;background-color:#fff;
+        color: #000;
+        &:hover{
+          background-color: #fff;
+        }
+      }
+      &:hover{
+        background-color:#2b2b2b;
+      }
+      i{
+        cursor: pointer;
+      }
+    }
+  }
+}
+.main{
+  .input{
+    width: 100%;
+    .tabList{
+      width: 100%;
+      height: 42px;
+      line-height: 40px;
+      background-color:#11161F;
+      span{
+        color: rgba(255, 255, 255, 0.4);padding: 0 15px;display: inline-block;cursor: pointer;
+        background: -webkit-linear-gradient(left, #2F3A4E, #2F3A4E);
+        background: -moz-linear-gradient(right, #2F3A4E, #2F3A4E);
+        background: linear-gradient(to right, #2F3A4E, #2F3A4E);
+        i{
+          cursor: pointer;
+        }
+        
+      }
+      .active{
+        background:#1E2431;
+        color: #fff;
+
+      }
+    }
+  }
+  
+  .line3{
+    box-sizing: border-box;
+    z-index: 99;
+    width: 100%;color:#fff;
+    background-color:#1E2431;
+    height:260px;
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    // border-bottom: 5px solid transparent;
+    overflow: hidden;
+    padding-bottom: 1px;
+    padding-top: 25px;
+    .fontSize{
+      top: 0px;
+      position: absolute;
+      right: 8px;
+      z-index: 1000000;
+      font-size: 14px;
+      color: #999;
+      width: 48px;
+      text-align: center;
+      height:25px;
+      line-height: 25px;
+      background-color:#1E2431;
+    }
+    .logDiv{
+      background:black;
+      height:230px;
+      overflow-y:auto;
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 10px;
+      box-sizing: border-box;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .hideLine{
+      top: 0px;
+      right: 100px;
+      cursor: pointer;
+      position: absolute;
+    }
+    .clearLog{
+      top: 4px;
+      right: 70px;
+      cursor: pointer;
+      position: absolute;
+    }
+  }
+}
+.right{
+  width: 100%;display: inline-block;background-color: #232936;height: 100%;
+  .button{
+    width:100%;display:flex;
+    p{
+      flex: 1;height: 40px;text-align: center;
+      line-height:38px;
+      cursor: pointer;
+      background-color: #2B313E;
+      color: #586583;
+      border-radius: 1px;
+    }
+    .active{
+      background-color: #232936;
+      color: #FFFFFF;
+    }
+  }
+}
+.shade{
+  position: fixed;
+  z-index: 100000;
+  width: 380px;
+  height: 200px;
+  left: 50%;
+  top: 50%;
+  background-color:#263238;
+  margin-left: -150px;
+  margin-top: -100px;
+  header{
+    height: 40px;
+    line-height:40px;
+    background: #fff;
+    background-size: 30px 30px;
+    padding-left:15px;
+    font-size: 20px;
+  }
+  div{
+    border: 1px solid #444;
+    height:160px;
+    p{
+      height: 35px;
+      line-height: 35px;
+      margin-top: 40px;
+      color: #777;
+      padding-left:40px;
+      input{
+        background-color:#263238;
+        border-bottom:2px solid #E91E63;
+        width: 240px;color: #777;
+        padding: 3px;
+      }
+    }
+    footer{
+      margin-top: 30px;
+      height: 30px;
+      line-height: 30px;
+      margin-left: 160px;
+      span{
+        display: inline-block;
+        padding: 0 20px;
+        background-color: #314549;
+        border-radius:3px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}

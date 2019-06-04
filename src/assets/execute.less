@@ -1,0 +1,598 @@
+.page {
+
+    .dialog {
+
+        .bg {
+            background: #272F3E;
+            padding: 30px 0px;
+
+            .tttt {
+                text-align: center;
+                color: rgba(255, 255, 255, 0.9);
+                font-size: 20px;
+
+            }
+
+            .bbbbb {
+                width: 560px;
+                margin: 0 auto;
+
+                img {
+                    width: 30px;
+                }
+            }
+
+            .downloadLink {
+                display: flex;
+                margin: 50px 0 20px;
+
+                .linkDiv {
+                    margin-left: 16px;
+                }
+
+                .name {
+                    line-height: 22px;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                    color: rgba(255, 255, 255, 0.9);
+                }
+
+                .link {
+
+                    font-size: 14px;
+
+                    a {
+                        color: #2B96EC;
+                        border-bottom: #2B96EC 1px solid;
+                    }
+                }
+            }
+        }
+
+    }
+
+    width: 100%;
+
+    .go {
+        transform: rotate(-360deg);
+        transition: all 1s;
+    }
+
+    .deploy {
+        width: 100%;
+
+        .environment {
+            padding: 0px 20px;
+
+            .title {
+                margin-top: 36px;
+                margin-bottom: 16px;
+                font-size: 14px;
+                color: #BBC1CB;
+                display: flex;
+                justify-content: space-between;
+                .save {
+                    cursor: pointer;
+                    font-size: 14px;
+                    line-height: 27px;
+                    width: 102px;
+                    text-align: center;
+                    background: -webkit-linear-gradient(left, #008DFF, #0062FF);
+                    background: -moz-linear-gradient(right, #008DFF, #0062FF);
+                    background: linear-gradient(to right, #008DFF, #0062FF);
+                    margin-left: 8px;
+                    border-radius: 2px;
+                    color: white;
+                }
+            }
+
+            ul {
+                font-size: 13px;
+
+                li {
+                    margin-bottom: 4px;
+                    background-color: #181E29;
+                    line-height: 35px;
+                    color: #5E6778;
+                    padding: 2.5px 5px;
+                    display: flex;
+                    justify-content: flex-start;
+
+                    #address {
+                        word-wrap: break-word;
+                        overflow: hidden;
+                        line-height: 20px;
+                        margin-top: 8px;
+                        position: relative;
+                        box-sizing: border-box;
+                        width: 100%;
+                        padding-right: 30px;
+                        
+                    }
+
+                    .copyAddress {
+                        width: 12px;
+                        position: absolute;
+                        top: 4px;
+                        right: 10px;;
+                    }
+
+                    .wicc {
+                        margin-top: 1px;
+                        font-size: 12px;
+                        font-style: italic;
+                        margin-left: 10px;
+                    }
+
+                    input {
+                        background-color: #777;
+                        color: #fff;
+                        width: 90px;
+                        padding: 2px 5px;
+                        border-radius: 2px;
+                        font-size: 13px;
+                    }
+                }
+
+                .input {
+                    font-size: 14px;
+
+                    input {
+                        width: 80px;
+                    }
+                }
+
+                .network {
+                    select {
+                        background-color: #777;
+                        border-radius: 2px;
+                        font-size: 13px;
+                        padding: 2px 5px;
+                        color: #fff;
+                        width: 142px;
+                    }
+                }
+            }
+        }
+
+        .deployButton {
+            cursor: pointer;
+            line-height: 34px;
+            font-size: 15px;
+            text-align: center;
+            color: #fff;
+            background: -webkit-linear-gradient(left, #008DFF, #0062FF);
+            background: -moz-linear-gradient(right, #008DFF, #0062FF);
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #008DFF, #0062FF);
+            /* 标准的语法 */
+            border-radius: 3px;
+            margin: 30px 20px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .loading{
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    .run {
+        width: 100%;
+        background: #232936;
+
+        .contract {
+            padding: 0 20px;
+            border-bottom: 3px solid black;
+
+            .txHash {
+                position: relative;
+
+                p {
+                    margin-top: 36px;
+                    margin-bottom: 16px;
+                    font-size: 14px;
+                    color: #E2E8F0;
+                }
+
+                textarea {
+                    box-sizing: border-box;
+                    background-color: #181E29;
+                    width: 100%;
+                    line-height: 1.5;
+                    font-size: 13px;
+                    letter-spacing: 1px;
+                    padding: 5px 25px 5px 10px;
+                    color: #E2E8F0;
+                }
+
+                .TxHashCopy {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    height: 13px;
+                }
+            }
+
+            .content {
+                padding: 20px 0 30px;
+
+                .title {
+                    color: #E2E8F0;
+                    font-size: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    .save {
+                        cursor: pointer;
+                        font-size: 14px;
+                        line-height: 27px;
+                        width: 102px;
+                        text-align: center;
+                        background: -webkit-linear-gradient(left, #008DFF, #0062FF);
+                        background: -moz-linear-gradient(right, #008DFF, #0062FF);
+                        background: linear-gradient(to right, #008DFF, #0062FF);
+                        margin-left: 8px;
+                        border-radius: 2px;
+                    }
+                }
+
+                .regid {
+                    position: relative;
+
+                    input {
+                        box-sizing: border-box;
+                        margin-top: 16px;
+                        display: inline-block;
+                        width: 100%;
+                        padding: 5px 30px 5px 10px;
+                        background-color: #181E29;
+                        line-height: 24px;
+                        color: #E2E8F0;
+
+                    }
+
+                    span {
+                        display: inline-block;
+                        vertical-align: middle;
+                        position: absolute;
+                        top: 24px;
+                        right: 10px;
+                        height: 13px;
+                    }
+
+                }
+            }
+
+        }
+
+        .parameter {
+            position: relative;
+            margin-top: 4px;
+            padding: 20px 20px;
+            color: #E2E8F0;
+            font-size: 14px;
+            border-bottom: 3px solid black;
+
+            .add {
+                .transfarm {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+
+                    .title {
+                        line-height: 29px;
+                    }
+
+                    #select {
+                        background: #343E53;
+                        font-size: 13px;
+                        color: #E2E8F0;
+                        line-height: 29px;
+                        width: 150px;
+                        border-radius: 2px;
+                    }
+
+                    .addBottom {
+                        height: 29px;
+                        margin-left: 15px;
+                        margin-top: 5px;
+                        cursor: pointer;
+                    }
+                }
+
+                .item {
+                    width: 100%;
+                    overflow-y: auto;
+                    font-size: 13px;
+                    max-height: 180px;
+                    .cell {
+                        display: flex;
+                        justify-content: flex-start;
+                        margin-bottom: 2px;
+                        background: #181E29;
+                        border-radius: 3px;
+                        padding: 5px;
+                        overflow: hidden;
+
+                        input {
+                            box-sizing: border-box;
+                            background: rgba(60, 71, 93, 0.308);
+                            color: #E2E8F0;
+                            padding: 0 5px;
+                            line-height: 24px;
+                            height: 24px;
+                            border-radius: 2px;
+                            width: 130px;
+                            cursor: pointer;
+
+                        }
+
+                        .delParam {
+                            margin-top: 3px;
+                            height: 17px;
+                            cursor: pointer;
+                        }
+
+                        .typeStr {
+                            margin: 0px 5px;
+                            color: #6E798E;
+                            line-height: 24px;
+                            overflow: hidden;
+                            width: 60px;
+                            text-align: right;
+
+                        }
+
+                        .result {
+
+                            box-sizing: border-box;
+                            border-radius: 2px;
+                            margin-right: 5px;
+                            padding: 0 5px;
+                            background: rgba(60, 71, 93, 0.308);
+                            color: #E2E8F0;
+                            line-height: 24px;
+                            width: calc(100% - 300px);
+                            min-width: 150px;
+                            overflow: hidden;
+                            word-wrap: break-word;
+
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        .btnDiv {
+            height: 40px;
+            padding: 11.5px 0 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
+
+            .save {
+                cursor: pointer;
+                font-size: 14px;
+                line-height: 27px;
+                width: 102px;
+                text-align: center;
+                background: -webkit-linear-gradient(left, #008DFF, #0062FF);
+                background: -moz-linear-gradient(right, #008DFF, #0062FF);
+                background: linear-gradient(to right, #008DFF, #0062FF);
+                margin-left: 8px;
+                border-radius: 2px;
+            }
+        }
+
+        .CallCommand {
+            position: relative;
+            border-radius: 3px;
+            margin-top: 10px;
+            color: #E2E8F0;
+            padding: 20px 20px;
+            border-bottom: 3px solid black;
+
+            .command {
+                p {
+                    font-size: 14px;
+                }
+
+                .contractStr {
+                    font-size: 13px;
+                    position: relative;
+
+                    #contractValue {
+                        box-sizing: border-box;
+                        margin-top: 16px;
+                        display: inline-block;
+                        width: 100%;
+                        padding: 5px 30px 5px 60px;
+                        background-color: #181E29;
+                        line-height: 24px;
+                        min-height: 30px;
+                        color: #E2E8F0;
+                        overflow: hidden;
+                        word-wrap: break-word;
+                    }
+
+                    span {
+                        display: inline-block;
+                        vertical-align: middle;
+                        position: absolute;
+                        top: 25px;
+                        right: 10px;
+                        text-align: right;
+                        height: 13px;
+                        width: 30px;
+                    }
+
+                    .amountInput {
+                        box-sizing: border-box;
+                        margin-top: 16px;
+                        width: 100%;
+                        padding: 5px 35px 5px 60px;
+                        background-color: #181E29;
+                        line-height: 24px;
+                        color: #E2E8F0;
+                    }
+
+                    .t {
+                        left: 5px;
+                        color: #6E798E;
+                    }
+
+                }
+            }
+        }
+
+        .CollectionsDiv {
+            color: #6E798E;
+            font-size: 13px;
+            padding: 20px;
+            border-bottom: 3px solid black;
+
+            .tabTitle {
+                color: #E2E8F0;
+                font-size: 14px;
+                line-height: 20px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+            }
+            .collectionsView{
+                max-height: 180px;
+                overflow-y: auto;
+                overflow-x: hidden;
+
+            }
+            .Collection_cell {
+
+                display: flex;
+                justify-content: flex-start;
+                margin-bottom: 2px;
+                background: #181E29;
+                border-radius: 3px;
+                padding: 6px;
+                position: relative;
+                .paramT {
+                    background: #1F2633;
+                    width: 80px;
+                    padding-left: 10px;
+                    line-height: 22px;
+                    height: 22px;
+                    margin: 0 10px;
+                }
+
+                .paramV {
+                    line-height: 22px;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    margin-right: 70px;
+                }
+
+                img {
+                    width: 16px;
+                    margin-top: 3px;
+                    height: 16px;
+                    cursor: pointer;
+                }
+
+                .location {
+                    position: absolute;
+                    right: 0px;
+
+                    .call {
+                        line-height: 22px;
+                        color: #1C9AFF;
+                        cursor: pointer;
+                        margin: 0 10px;
+                    }
+
+                    img {
+                        margin-top: -1px;
+                        width: 14px;
+                    }
+                }
+
+
+            }
+
+        }
+
+        #invokeTxHash {
+            box-sizing: border-box;
+            margin-top: 16px;
+            display: inline-block;
+            width: 100%;
+            padding: 5px 30px 5px 60px;
+            background-color: #181E29;
+            line-height: 24px;
+            min-height: 30px;
+            color: #E2E8F0;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .GetContractHeader {
+            display: flex;
+            justify-content: space-between;
+
+            select {
+                background: #343E53;
+                font-size: 13px;
+                color: #E2E8F0;
+                line-height: 29px;
+                width: 150px;
+                border-radius: 2px;
+            }
+        }
+    }
+
+    .debug {
+        height: 200px;
+        line-height: 200px;
+        background-color: rgba(60, 60, 60, 1);
+        color: rgba(255, 255, 255, 1);
+        font-size: 20px;
+        text-align: center;
+        border: 1px solid rgba(60, 60, 60, 1);
+    }
+
+    .help {
+        height: 200px;
+        
+        color: #E2E8F0;
+        font-size: 20px;
+        text-align: center;
+        
+        .contact {
+            width: 100%;
+            height: 54px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .mailbox {
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+
+            p {
+                font-size: 12px;
+                margin: 8px 0 15px 0;
+                line-height: 25px;
+                a {
+                    color: #E2E8F0;
+                    text-decoration: underline;
+                }
+            }
+        }
+        .helpItem{
+            border-bottom: 3px solid black;
+            padding: 30px 20px;
+            
+        }
+    }
+
+}

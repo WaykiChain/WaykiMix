@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="11.002" height="13.001" viewBox="0 0 11.002 13.001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #6e798e;
+      }
+
+      .cls-2, .cls-5 {
+        fill: none;
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <path id="联合_2640" data-name="联合 2640" class="cls-1" d="M-13722-451v-11h2v9h6v2Z" transform="translate(14356 789)"/>
+    </clipPath>
+  </defs>
+  <g id="组_25124" data-name="组 25124" transform="translate(-1201.998 -224)">
+    <g id="组_25100" data-name="组 25100" transform="translate(556 -100)">
+      <g id="矩形_21805" data-name="矩形 21805" class="cls-2" transform="translate(649 324)">
+        <rect class="cls-4" width="8" height="10" rx="2"/>
+        <rect class="cls-5" x="0.5" y="0.5" width="7" height="9" rx="1.5"/>
+      </g>
+      <g id="蒙版组_2178" data-name="蒙版组 2178" class="cls-3" transform="translate(12 -1)">
+        <g id="矩形_21802" data-name="矩形 21802" class="cls-2" transform="translate(634 328)">
+          <rect class="cls-4" width="8" height="10" rx="2"/>
+          <rect class="cls-5" x="0.5" y="0.5" width="7" height="9" rx="1.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
