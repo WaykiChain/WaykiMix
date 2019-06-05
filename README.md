@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# install dependencies   (if loading too long time ,try cnpm)
 npm install
 
 # serve with hot reload at localhost:8080
