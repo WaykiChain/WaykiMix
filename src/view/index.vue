@@ -110,7 +110,7 @@
       <vue-draggable-resizable
         :w="500"
         :min-width="350"
-        :max-width="900"
+        :max-width="1400"
         :handles="['ml']"
         :draggable="false"
         :style="{ height: contentHeight + 'px'}"
@@ -417,14 +417,7 @@ export default {
         );
         return false;
       }
-      _this.code =
-        'mylib = require "mylib"\n' +
-        "\n" +
-        "Main = function()\n" +
-        "\n" +
-        "end\n" +
-        "\n" +
-        "Main()";
+      _this.code ="";
       _this.showShade = false;
       let time = new Date().getTime();
       _this.localTab = {

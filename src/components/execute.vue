@@ -144,7 +144,7 @@
           </div>
           <div class="contractStr">
             <span class="t">Amount</span>
-            <input class="amountInput" v-model="wiccNum" type="number">
+            <input class="amountInput" v-model="wiccNum" @input="inputSawiNum">
             <span>sawi</span>
           </div>
           <div class="btnDiv">
@@ -159,7 +159,7 @@
         <div class="collectionsView">
           <div class="Collection_cell" v-for="(item,index) in savedParams" :key="index">
             <img src="../assets/delete.svg" @click="deleteSavedParam(index)">
-            <label class="paramT">Param{{index+1}}</label>
+            <input class="paramT" v-model="item.paramName" style="color:#E2E8F0" @change="reName(index,item)">
             <label class="paramV">{{item.param}}</label>
             <div class="location">
               <img src="../assets/edit.svg" @click="editSavedParam(item)">
@@ -360,32 +360,22 @@ export default {
       invokeTxHash: "",
       wiccNum: localStorage.getItem("wiccNum")
         ? localStorage.getItem("wiccNum")
-        : "",
+        : "0",
       ifGetRegId: false,
       savedParams: localStorage.getItem("savedParam")
         ? JSON.parse(localStorage.getItem("savedParam"))
         : []
     };
   },
-  mounted() {
-    // window.onload = () => {
-    //   try {
-    //     WiccWallet.getDefaultAccount().then(
-    //       data => {
-    //         this.network = data.network;
-    //         this.account = data;
-    //         this.login("0");
-    //       },
-    //       error => {
-    //         this.login("0");
-    //       }
-    //     );
-    //   } catch (error) {
-    //     this.$emit("errorLog", "Please install WaykiMax at first. Chrome:https: //chrome.google.com/webstore/detail/waykimax/odaegfdpkolgbdaeibcebmibmibchbce, FirFox:https: //addons.mozilla.org/en-US/firefox/addon/waykichain/");
-    //   }
-    // };
-  },
   methods: {
+    inputSawiNum(){
+      let intNum = parseInt(this.wiccNum)
+      if (isNaN(intNum)){
+        this.wiccNum = ''
+        return
+      }
+      this.wiccNum = intNum
+    },
     addParam() {
       this.params.push({
         type: this.type,
@@ -502,12 +492,21 @@ export default {
     SaveParam() {
       let param = this.Gen(true);
       let Obj = {
+        paramName:'ParamName',
         param: param,
         params: localStorage.getItem("params")
       };
       this.savedParams.push(Obj);
       localStorage.setItem("savedParam", JSON.stringify(this.savedParams));
       this.$emit("errorLog", "Yes", "Record add successfully");
+    },
+    reName(index,row){
+      let itemStr = localStorage.getItem("savedParam")
+      let items = JSON.parse(itemStr)
+      items.splice(index,1)
+      console.log(row)
+      items.splice(index,0,row)
+      localStorage.setItem("savedParam", JSON.stringify(items));
     },
     deleteSavedParam(index) {
       this.savedParams.splice(index, 1);
@@ -643,6 +642,7 @@ export default {
     },
     deployButton() {
       let _this = this;
+      this.contractRegId = ""
       let url = "https://runcode-api2-ng.dooccn.com/compile2";
       let para = {
         language: 25,
@@ -694,7 +694,6 @@ export default {
     getContract() {
       let _this = this;
       if (!_this.account.network) {
-        debugger
         this.login("0");
       } else {
         if (_this.txHash === "") {
@@ -746,7 +745,7 @@ export default {
           localStorage.setItem("deployedTxHash", data.txid);
         } else {
           this.invokeTxHash = data.txid;
-          this.$emit("errorLog", "Yes", this.account.address + "call contract regid：" + this.contractRegId + ",arguments：" + this.sampleCode + ",amount：" + this.wiccNum + "sawi" + "returnHash：" + this.invokeTxHash);
+          this.$emit("errorLog", "Yes", this.account.address + "call contract regid：" + this.contractRegId + ",arguments：" + this.sampleCode + ",amount：" + this.wiccNum + " sawi ." + " TxHash：" + this.invokeTxHash);
         }
       } else {
         this.$emit("errorLog", error.message);

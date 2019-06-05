@@ -1,0 +1,24 @@
+variables:
+   WEB_DIR: '/opt/www/wicc-waykimix'
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+   - build
+   
+deploy for master:
+   stage: build
+   script:
+     - whoami
+     - mkdir -p $WEB_DIR
+     - yarn install --network-timeout 1000000
+     - yarn run build
+     - rsync -a --delete ./dist/ $WEB_DIR
+     
+   only:
+    - prod
+   tags:
+    - hk-gw
+   when: on_success
