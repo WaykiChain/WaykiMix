@@ -22,4 +22,3 @@ deploy for master:
    tags:
     - hk-gw
    when: on_success
-   
