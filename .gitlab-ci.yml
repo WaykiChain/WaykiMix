@@ -6,8 +6,7 @@ cache:
     - node_modules/
 
 stages:
-   - build
-   
+   - build   
 deploy for master:
    stage: build
    script:
