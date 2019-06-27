@@ -6,6 +6,7 @@ cache:
 
 stages:
    - build   
+   
 deploy for master:
    stage: build
    script:
