@@ -16,6 +16,7 @@ deploy for master:
      - yarn install --network-timeout 1000000
      - yarn run build
      - rsync -a --delete ./dist/ $WEB_DIR
+       
      
    only:
     - prod
