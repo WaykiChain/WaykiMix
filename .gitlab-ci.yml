@@ -1,6 +1,5 @@
 variables:
    WEB_DIR: '/opt/www/wicc-waykimix'
-
 cache:
   paths:
     - node_modules/
