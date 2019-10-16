@@ -400,6 +400,11 @@ export default {
   },
   methods: {
     inputSawi(ev) {
+      var reg = /^[A-Z]+$/
+      console.log(ev.target.value)
+      if(!reg.exec(ev.target.value)){
+        this.$emit("errorLog", "WRC30 Symbol must be composed of 6 or 7 capital letters [A-Z]");
+      }
       this.inputBox = ev.target.value.replace(/[^A-Z]/, "");
     },
     inputSawiNum() {
