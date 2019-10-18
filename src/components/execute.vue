@@ -703,10 +703,11 @@ export default {
             _this.getAcountBalance();
           },
           error => {
-            if (error.errorCode === 7000) {
-              _this.$emit("errorLog", error.message);
-            } else {
+            if (error.errorCode === 1000) {
               _this.dialogInstallInfo = true;
+              
+            } else {
+              _this.$emit("errorLog", error.message);
             }
             // _this.network = null;
             _this.account = {};
