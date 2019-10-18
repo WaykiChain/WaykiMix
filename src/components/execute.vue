@@ -707,7 +707,7 @@ export default {
               _this.dialogInstallInfo = true;
               
             } else {
-              _this.$emit("errorLog", error.message);
+              _this.$emit("errorLog", error.errorMsg);
             }
             // _this.network = null;
             _this.account = {};
