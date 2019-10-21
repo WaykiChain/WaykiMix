@@ -638,16 +638,10 @@ export default {
         this.$emit("errorLog", "Please entry smart contract regid");
         return false;
       }
-      if (this.sampleCode === "") {
-        this.$emit("errorLog", "Please entry smart contract regid");
-        return false;
-      }
-      // console.log(this.inputBox)
-      // console.log((this.wiccNum)*Math.pow(10,8))
       waykiBridge.walletPlugin(
         "walletPluginUContractInvoke",
         {
-          amount: parseInt(this.wiccNum) * Math.pow(10, 8),
+          amount: this.wiccNum?parseInt(this.wiccNum) * Math.pow(10, 8):0,
           coinSymbol: this.inputBox,
           regId: this.contractRegId,
           contract: this.sampleCode,
@@ -867,13 +861,13 @@ export default {
             "errorLog",
             "Yes",
             this.account.address +
-              "call contract regid：" +
+              " call contract regid：" +
               this.contractRegId +
               ",arguments：" +
               this.sampleCode +
               ",amount：" +
               this.wiccNum +
-              " sawi ." +
+              " wi ." +
               " TxHash：" +
               this.invokeTxHash
           );
