@@ -649,11 +649,9 @@ export default {
         },
         function(res) {
           _this.check(null, res, "InvokeContract");
-          console.log(res);
         },
         function(err) {
           _this.check(err, "", "InvokeContract");
-          console.log(err);
         }
       );
     },
