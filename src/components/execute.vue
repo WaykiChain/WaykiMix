@@ -5,8 +5,8 @@
         <div class="title">
           <span>Environment</span>
           <div class="save" @click="login('1')">
-              <span>Refresh</span>
-            </div>
+            <span>Refresh</span>
+          </div>
         </div>
         <ul>
           <li class="network">
@@ -19,17 +19,17 @@
             </label>
             <label v-if="network==='location'">
               Port ：
-              <input type="tel" v-model="port">
+              <input type="tel" v-model="port" />
             </label>
           </li>
           <li class="input" v-if="network==='location'">
             <label>
               RpcUsername ：
-              <input type="text" v-model="user">
+              <input type="text" v-model="user" />
             </label>
             <label style="margin-left: 15px;">
               RpcPassword ：
-              <input type="password" v-model="password">
+              <input type="password" v-model="password" />
             </label>
           </li>
           <li>
@@ -42,7 +42,7 @@
                 @click="copy('.copyAddress')"
                 class="copyAddress"
                 src="../assets/copy.svg"
-              >
+              />
             </p>
           </li>
           <li>
@@ -68,26 +68,21 @@
           <p>Deployed contract Txhash:</p>
           <textarea v-model="txHash" id="txHash"></textarea>
           <span class="TxHashCopy" data-clipboard-target="#txHash" @click="copy('.TxHashCopy')">
-            <img style="cursor: pointer" src="../assets/copy.svg">
+            <img style="cursor: pointer" src="../assets/copy.svg" />
           </span>
         </div>
         <div class="content">
           <div class="title">
             <span>Contract Regid:</span>
-           
+
             <div class="save" @click="getContract()">
               <span>Get</span>
             </div>
           </div>
           <p class="regid">
-            <input
-              type="text"
-              v-model="contractRegId"
-              id="regId"
-              autocomplete="off"
-            >
+            <input type="text" v-model="contractRegId" id="regId" autocomplete="off" />
             <span data-clipboard-target="#regId" @click="copy('.REGID')" class="REGID">
-              <img style="cursor: pointer;" src="../assets/copy.svg">
+              <img style="cursor: pointer;" src="../assets/copy.svg" />
             </span>
           </p>
         </div>
@@ -98,34 +93,46 @@
             <div>
               <span class="title">Param</span>
             </div>
-            <div style="box-sizing: border-box;">
+            <!-- <div style="box-sizing: border-box;">
               <select id="select" v-model="type">
                 <option v-for="item in options" :key="item.value" :value="item.value">{{item.label}}</option>
               </select>
               <img class="addBottom" @click="addParam" src="../assets/add.svg">
-            </div>
+            </div>-->
           </div>
-          <div class="item">
+          <div class="item" id="itemCell">
             <div class="cell" v-for="(item, index) in params" :key="index">
-              <img class="delParam" @click="setDelete(index)" src="../assets/delete.svg">
+              <img class="delParam" @click="setDelete(index)" src="../assets/delete.svg" />
               <p class="typeStr">{{item.name}}</p>
               <input
                 :type="(item.type == 2 || item.type == 3) ? 'number' : 'text'"
                 v-model="item.val"
                 @input="setTransfer(item.type, index)"
-              >
+              />
               <p class="typeStr" style="width:42px;margin-left:30px;">toHex</p>
               <p class="result">{{item.transferVal}}</p>
             </div>
           </div>
+          <div style="box-sizing: border-box;">
+            <img class="addBottom" @click="addParam" src="../assets/add.svg" />
+            <select
+              id="select"
+              v-model="type"
+              v-if="addSelect===true"
+              size="5"
+              @click="addChange()"
+            >
+              <option v-for="item in options" :key="item.value" :value="item.value">{{item.label}}</option>
+            </select>
+          </div>
           <div class="btnDiv">
-              <div class="save" style="background:#343E53;" @click="SaveParam">
-                <span>Save</span>
-              </div>
-              <div class="save" @click="Gen(false)">
-                <span>Gen</span>
-              </div>
+            <div class="save" style="background:#343E53;" @click="SaveParam">
+              <span>Save</span>
             </div>
+            <div class="save" @click="Gen(false)">
+              <span>Gen</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="CallCommand">
@@ -139,13 +146,29 @@
               @click="copy('.contractTagert')"
               class="contractTagert"
             >
-              <img style="cursor: pointer;" src="../assets/copy.svg">
+              <img style="cursor: pointer;" src="../assets/copy.svg" />
             </span>
           </div>
           <div class="contractStr">
             <span class="t">Amount</span>
-            <input class="amountInput" v-model="wiccNum" @input="inputSawiNum">
-            <span>sawi</span>
+            <input class="amountInput" v-model="wiccNum" @input="inputSawiNum" />
+            <span class="amountSelect">
+              <select @change="inputOption($event)">
+                <option value="WICC">WICC</option>
+                <option value="WUSD">WUSD</option>
+                <option value="WGRT">WGRT</option>
+                <option value="WRC30">WRC30</option>
+              </select>
+            </span>
+            <input
+              name="box"
+              disabled="inputBox==='WICC'"
+              style="color:#E2E8F0;position:absolute;right:30px;top:25px;width:80px;height:18px;background:#343E53;"
+              v-model="inputBox"
+              @input="inputSawi($event)"
+              type="text"
+              maxlength="7"
+            />
           </div>
           <div class="btnDiv">
             <div class="save" @click="invokeContract">
@@ -158,11 +181,16 @@
         <p class="tabTitle">Collections</p>
         <div class="collectionsView">
           <div class="Collection_cell" v-for="(item,index) in savedParams" :key="index">
-            <img src="../assets/delete.svg" @click="deleteSavedParam(index)">
-            <input class="paramT" v-model="item.paramName" style="color:#E2E8F0" @change="reName(index,item)">
+            <img src="../assets/delete.svg" @click="deleteSavedParam(index)" />
+            <input
+              class="paramT"
+              v-model="item.paramName"
+              style="color:#E2E8F0"
+              @change="reName(index,item)"
+            />
             <label class="paramV">{{item.param}}</label>
             <div class="location">
-              <img src="../assets/edit.svg" @click="editSavedParam(item)">
+              <img src="../assets/edit.svg" @click="editSavedParam(item)" />
               <label class="call" @click="callSavedParam(item)">Call</label>
             </div>
           </div>
@@ -187,7 +215,7 @@
 
           <div class="contractStr">
             <span class="t">Key</span>
-            <input id="contractValue" v-model="GetcontractadataKey">
+            <input id="contractValue" v-model="GetcontractadataKey" />
             <span style="color: #1C9AFF;cursor: pointer;" @click="GetDataOnline">Get</span>
           </div>
           <div class="contractStr">
@@ -198,7 +226,7 @@
               @click="copy('.contractTagert')"
               class="contractTagert"
             >
-              <img style="cursor: pointer;" src="../assets/copy.svg">
+              <img style="cursor: pointer;" src="../assets/copy.svg" />
             </span>
           </div>
         </div>
@@ -239,7 +267,7 @@
         </div>
       </div>
       <div class="helpItem" style="border:none">
-        <p class="contact" style="font-style:italic">Version: v 2.0.0</p>
+        <p class="contact" style="font-style:italic">Version: v 2.0.1</p>
       </div>
     </div>
 
@@ -250,7 +278,7 @@
           <div class="downloadLink">
             <div>
               <span>
-                <img src="../assets/chrome.svg" alt>
+                <img src="../assets/chrome.svg" alt />
               </span>
             </div>
             <div class="linkDiv">
@@ -267,7 +295,7 @@
           <div class="downloadLink">
             <div>
               <span>
-                <img src="../assets/firefox.svg" alt>
+                <img src="../assets/firefox.svg" alt />
               </span>
             </div>
             <div class="linkDiv">
@@ -318,7 +346,10 @@ export default {
     return {
       isloading: false,
       dialogInstallInfo: false,
+      addSelect: false,
       GetContractValue: "",
+      wiccType: "",
+      inputBox: "WICC",
       balance: 0, //余额
       GetcontractadataKey: localStorage.getItem("GetcontractadataKey")
         ? localStorage.getItem("GetcontractadataKey")
@@ -368,22 +399,51 @@ export default {
     };
   },
   methods: {
-    inputSawiNum(){
-      let intNum = parseInt(this.wiccNum)
-      if (isNaN(intNum)){
-        this.wiccNum = ''
-        return
+    inputSawi(ev) {
+      var reg = /^[A-Z]+$/
+      console.log(ev.target.value)
+      if(!reg.exec(ev.target.value)){
+        this.$emit("errorLog", "WRC30 Symbol must be composed of 6 or 7 capital letters [A-Z]");
       }
-      this.wiccNum = intNum
+      this.inputBox = ev.target.value.replace(/[^A-Z]/, "");
+    },
+    inputSawiNum() {
+      let intNum = parseInt(this.wiccNum);
+      if (isNaN(intNum)) {
+        this.wiccNum = "";
+        return;
+      }
+      this.wiccNum = intNum;
+    },
+    inputOption(ev) {
+      var index = ev.target.selectedIndex;
+      var val = ev.target[index].value;
+      if (val !== "WRC30") {
+        this.inputBox = val;
+        ev.target.parentNode.parentNode.children[3].value = val;
+        ev.target.parentNode.parentNode.children[3].disabled = true;
+      } else {
+        this.inputBox = "";
+        ev.target.parentNode.parentNode.children[3].value = "";
+        ev.target.parentNode.parentNode.children[3].disabled = false;
+      }
     },
     addParam() {
+      this.addSelect = !this.addSelect;
+    },
+    addChange() {
+      this.addSelect = false;
       this.params.push({
         type: this.type,
         name: this.getName(this.type),
         val: "",
         transferVal: ""
       });
+      var showContent = document.getElementById("itemCell");
       localStorage.setItem("params", JSON.stringify(this.params));
+      setTimeout(() => {
+        showContent.scrollTop = 100000;
+      }, 0);
     },
     getName(type) {
       let name = "";
@@ -492,7 +552,7 @@ export default {
     SaveParam() {
       let param = this.Gen(true);
       let Obj = {
-        paramName:'ParamName',
+        paramName: "ParamName",
         param: param,
         params: localStorage.getItem("params")
       };
@@ -500,12 +560,12 @@ export default {
       localStorage.setItem("savedParam", JSON.stringify(this.savedParams));
       this.$emit("errorLog", "Yes", "Record add successfully");
     },
-    reName(index,row){
-      let itemStr = localStorage.getItem("savedParam")
-      let items = JSON.parse(itemStr)
-      items.splice(index,1)
-      console.log(row)
-      items.splice(index,0,row)
+    reName(index, row) {
+      let itemStr = localStorage.getItem("savedParam");
+      let items = JSON.parse(itemStr);
+      items.splice(index, 1);
+      console.log(row);
+      items.splice(index, 0, row);
       localStorage.setItem("savedParam", JSON.stringify(items));
     },
     deleteSavedParam(index) {
@@ -560,11 +620,10 @@ export default {
       this.$http
         .post(url, para)
         .then(res => {
-          
           if (res.data.code == 0) {
             this.$emit("errorLog", "Yes", res.data);
             this.GetContractValue = res.data.data.value;
-          }else{
+          } else {
             this.$emit("errorLog", res.data);
           }
         })
@@ -579,26 +638,40 @@ export default {
         this.$emit("errorLog", "Please entry smart contract regid");
         return false;
       }
-      if (this.sampleCode === "") {
-        this.$emit("errorLog", "Please entry smart contract regid");
-        return false;
-      }
-      try {
-        WiccWallet.callContract(
-          this.contractRegId,
-          this.sampleCode,
-          parseInt(this.wiccNum),
-          (error, data) => _this.check(error, data, "InvokeContract")
-        ).then(
-          () => {},
-          error => {
-            this.$emit("errorLog", error.message);
-          }
-        );
-      } catch (error) {
-       
-        this.dialogInstallInfo = true;
-      }
+      waykiBridge.walletPlugin(
+        "walletPluginUContractInvoke",
+        {
+          amount: this.wiccNum?parseInt(this.wiccNum) * Math.pow(10, 8):0,
+          coinSymbol: this.inputBox,
+          regId: this.contractRegId,
+          contract: this.sampleCode,
+          memo: "WaykiMix"
+        },
+        function(res) {
+          _this.check(null, res, "InvokeContract");
+          console.log(res);
+        },
+        function(err) {
+          _this.check(err, "", "InvokeContract");
+          console.log(err);
+        }
+      );
+      // try {
+      //   WaykiBridge.callContract(
+      //     this.contractRegId,
+      //     this.sampleCode,
+      //     parseInt(this.wiccNum),
+      //     (error, data) => _this.check(error, data, "InvokeContract")
+      //   ).then(
+      //     () => {},
+      //     error => {
+      //       this.$emit("errorLog", error.message);
+      //     }
+      //   );
+      // } catch (error) {
+
+      //   this.dialogInstallInfo = true;
+      // }
     },
     //复制hash值
     copy(name) {
@@ -615,26 +688,25 @@ export default {
         _this.rotates = 1;
       }
       _this.$nextTick(() => {
-        try {
-          WiccWallet.getDefaultAccount().then(
-            data => {
-              //_this.network = data.network;
-              _this.account = data;
-              _this.getAcountBalance();
-            },
-            error => {
-              _this.$emit("errorLog", error.message);
-              // _this.network = null;
-              _this.account = {};
+        waykiBridge.walletPlugin(
+          "getAddressInfo",
+          {},
+          data => {
+            //_this.network = data.network;
+            _this.account = data.result;
+            _this.getAcountBalance();
+          },
+          error => {
+            if (error.errorCode === 1000) {
+              _this.dialogInstallInfo = true;
+              
+            } else {
+              _this.$emit("errorLog", error.errorMsg);
             }
-          );
-        } catch (error) {
-          // _this.$emit(
-          //   "errorLog",
-          //   "Please install WaykiMax at first. Chrome:https: //chrome.google.com/webstore/detail/waykimax/odaegfdpkolgbdaeibcebmibmibchbce, FirFox:https: //addons.mozilla.org/en-US/firefox/addon/waykichain/"
-          // );
-          _this.dialogInstallInfo = true;
-        }
+            // _this.network = null;
+            _this.account = {};
+          }
+        );
       });
       setTimeout(function() {
         _this.rotates = 0;
@@ -642,7 +714,7 @@ export default {
     },
     deployButton() {
       let _this = this;
-      this.contractRegId = ""
+      this.contractRegId = "";
       let url = "https://runcode-api2-ng.dooccn.com/compile2";
       let para = {
         language: 25,
@@ -673,22 +745,54 @@ export default {
     deploy(_this) {
       _this.login("0");
       setTimeout(() => {
-        try {
-          WiccWallet.publishContract(_this.code, "", (error, data) =>
-            _this.check(error, data, "deploy")
-          ).then(
-            () => {},
-            error => {
-              _this.$emit("errorLog", error.message);
-            }
-          );
-        } catch (error) {
-          // _this.$emit(
-          //   "errorLog",
-          //   "Please install WaykiMax at first. Chrome:https: //chrome.google.com/webstore/detail/waykimax/odaegfdpkolgbdaeibcebmibmibchbce, FirFox:https: //addons.mozilla.org/en-US/firefox/addon/waykichain/"
-          // );
-          _this.dialogInstallInfo = true;
-        }
+        waykiBridge.walletPlugin(
+          "walletPluginContractIssue",
+          {
+            contractContent: _this.code,
+            contractDesc: "描述"
+          },
+          function(res) {
+            console.log(res);
+            _this.check(null, res, "deploy");
+          },
+          function(err) {
+            console.log(err);
+            _this.check(err, "", "deploy");
+            _this.$emit("errorLog", err.message);
+          }
+        );
+        return;
+        waykiBridge.walletPlugin(
+          "walletPluginContractInvoke",
+          {
+            contractContent: _this.code,
+            contractDesc: "描述"
+          },
+          data => {
+            console.log(data);
+
+            // _this.check(null, data, "deploy")
+          },
+          error => {
+            _this.check(error, data, "deploy");
+          }
+        );
+        // try {
+        //   WaykiBridge.publishContract(_this.code, "", (error, data) =>
+        //     _this.check(error, data, "deploy")
+        //   ).then(
+        //     () => {},
+        //     error => {
+        //       _this.$emit("errorLog", error.message);
+        //     }
+        //   );
+        // } catch (error) {
+        //   // _this.$emit(
+        //   //   "errorLog",
+        //   //   "Please install WaykiMax at first. Chrome:https: //chrome.google.com/webstore/detail/waykimax/odaegfdpkolgbdaeibcebmibmibchbce, FirFox:https: //addons.mozilla.org/en-US/firefox/addon/waykichain/"
+        //   // );
+        //   _this.dialogInstallInfo = true;
+        // }
       }, 100);
     },
     getContract() {
@@ -718,7 +822,11 @@ export default {
                   _this.$emit(
                     "errorLog",
                     "Yes",
-                    "Get contract regid:" + _this.contractRegId + " by deploy contract " + "txhash：" +  _this.txHash
+                    "Get contract regid:" +
+                      _this.contractRegId +
+                      " by deploy contract " +
+                      "txhash：" +
+                      _this.txHash
                   );
                 } else {
                   _this.ifGetRegId = false;
@@ -740,12 +848,29 @@ export default {
     check(error, data, from) {
       if (error === null) {
         if (from === "deploy") {
-          this.txHash = data.txid;
-          this.$emit("errorLog", "Yes", "Deploy contract txhash: " + this.txHash);
-          localStorage.setItem("deployedTxHash", data.txid);
+          this.txHash = data.result.txid;
+          this.$emit(
+            "errorLog",
+            "Yes",
+            "Deploy contract txhash: " + this.txHash
+          );
+          localStorage.setItem("deployedTxHash", data.result.txid);
         } else {
-          this.invokeTxHash = data.txid;
-          this.$emit("errorLog", "Yes", this.account.address + "call contract regid：" + this.contractRegId + ",arguments：" + this.sampleCode + ",amount：" + this.wiccNum + " sawi ." + " TxHash：" + this.invokeTxHash);
+          this.invokeTxHash = data.result.txid;
+          this.$emit(
+            "errorLog",
+            "Yes",
+            this.account.address +
+              " call contract regid：" +
+              this.contractRegId +
+              ",arguments：" +
+              this.sampleCode +
+              ",amount：" +
+              this.wiccNum +
+              " wi ." +
+              " TxHash：" +
+              this.invokeTxHash
+          );
         }
       } else {
         this.$emit("errorLog", error.message);

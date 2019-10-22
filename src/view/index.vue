@@ -295,6 +295,8 @@ export default {
       require("brace/ext/language_tools"); //language extension prerequsite...
       require("brace/mode/lua"); //language
       require("brace/theme/monokai");
+      require('brace/theme/chrome');
+      require('brace/ext/searchbox');
       require("brace/snippets/lua"); //snippet
     },
     reName(index) {
