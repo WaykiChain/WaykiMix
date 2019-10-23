@@ -856,7 +856,7 @@ export default {
           );
         }
       } else {
-        this.$emit("errorLog", error.message);
+        // this.$emit("errorLog", error.errorMsg);
         if (from === "deploy") {
           this.txHash = "";
         } else {
