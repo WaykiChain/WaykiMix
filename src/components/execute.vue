@@ -707,6 +707,7 @@ export default {
       _this.$http
         .post(url, para)
         .then(res => {
+          console.log(res)
           _this.isloading = false;
           let errorMsg = res.data.errors;
           if (errorMsg != "") {
@@ -740,7 +741,7 @@ export default {
           function(err) {
             console.log(err);
             _this.check(err, "", "deploy");
-            _this.$emit("errorLog", err.message);
+            _this.$emit("errorLog", err.errorMsg);
           }
         );
         return;
