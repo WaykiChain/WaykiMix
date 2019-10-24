@@ -736,11 +736,9 @@ export default {
             contractDesc: "描述"
           },
           function(res) {
-            console.log(res);
             _this.check(null, res, "deploy");
           },
           function(err) {
-            console.log(err);
             _this.check(err, "", "deploy");
             _this.$emit("errorLog", err.errorMsg);
           }
