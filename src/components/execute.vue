@@ -652,6 +652,7 @@ export default {
         },
         function(err) {
           _this.check(err, "", "InvokeContract");
+          _this.$emit("errorLog", err.errorMsg);
         }
       );
     },
