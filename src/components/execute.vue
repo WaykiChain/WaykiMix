@@ -697,34 +697,35 @@ export default {
     },
     deployButton() {
       let _this = this;
-      this.contractRegId = "";
-      let url = "https://runcode-api2-ng.dooccn.com/compile2";
-      let para = {
-        language: 25,
-        code: Base64.encode(_this.code),
-        stdin: 123
-      };
-      this.isloading = true;
-      _this.$http
-        .post(url, para)
-        .then(res => {
-          console.log(res)
-          _this.isloading = false;
-          let errorMsg = res.data.errors;
-          if (errorMsg != "") {
-            let iii = errorMsg.indexOf("module");
-            if (iii == -1) {
-              _this.$emit("errorLog", errorMsg);
-              return;
-            }
-            _this.deploy(_this);
-            return;
-          }
-          _this.deploy(_this);
-        })
-        .catch(err => {
-          _this.isloading = false;
-        });
+      _this.deploy(_this);
+      // this.contractRegId = "";
+      // let url = "https://runcode-api2-ng.dooccn.com/compile2";
+      // let para = {
+      //   language: 25,
+      //   code: Base64.encode(_this.code),
+      //   stdin: 123
+      // };
+      // this.isloading = true;
+      // _this.$http
+      //   .post(url, para)
+      //   .then(res => {
+      //     console.log(res)
+      //     _this.isloading = false;
+      //     let errorMsg = res.data.errors;
+      //     if (errorMsg != "") {
+      //       let iii = errorMsg.indexOf("module");
+      //       if (iii == -1) {
+      //         _this.$emit("errorLog", errorMsg);
+      //         return;
+      //       }
+      //       _this.deploy(_this);
+      //       return;
+      //     }
+      //     _this.deploy(_this);
+      //   })
+      //   .catch(err => {
+      //     _this.isloading = false;
+      //   });
     },
     deploy(_this) {
       _this.login("0");
@@ -751,30 +752,11 @@ export default {
             contractDesc: "描述"
           },
           data => {
-            console.log(data);
-
-            // _this.check(null, data, "deploy")
           },
           error => {
             _this.check(error, data, "deploy");
           }
         );
-        // try {
-        //   WaykiBridge.publishContract(_this.code, "", (error, data) =>
-        //     _this.check(error, data, "deploy")
-        //   ).then(
-        //     () => {},
-        //     error => {
-        //       _this.$emit("errorLog", error.message);
-        //     }
-        //   );
-        // } catch (error) {
-        //   // _this.$emit(
-        //   //   "errorLog",
-        //   //   "Please install WaykiMax at first. Chrome:https: //chrome.google.com/webstore/detail/waykimax/odaegfdpkolgbdaeibcebmibmibchbce, FirFox:https: //addons.mozilla.org/en-US/firefox/addon/waykichain/"
-        //   // );
-        //   _this.dialogInstallInfo = true;
-        // }
       }, 100);
     },
     getContract() {
