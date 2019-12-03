@@ -11,7 +11,7 @@
         <ul>
           <li class="network">
             <label style="padding-right: 20px;">
-              NetWork ：{{account.network}}
+              NetWork ：{{network}}
               <!--<select v-model="network">-->
               <!--<option :value="account.network">{{account.network}}</option>-->
               <!--<option value="location">{{'location'| filts }}</option>-->
@@ -46,9 +46,24 @@
             </p>
           </li>
           <li>
-            <p>Balance：</p>
+            <table style="width:100%;">
+              <tr>
+                <td rowspan="3">Balance：</td>
+                <td style="width:80%;">{{balanceWICC}}</td>
+                <td>WICC</td>
+              </tr>
+              <tr>
+                <td style="width:80%;">{{balanceWUSD}}</td>
+                <td>WUSD</td>
+              </tr>
+              <tr>
+                <td style="width:80%;">{{balanceWGRT}}</td>
+                <td>WGRT</td>
+              </tr>
+            </table>
+            <!-- <p>Balance：</p>
             <p id="address">{{balance ? balance : 0}}</p>
-            <p class="wicc">WICC</p>
+            <p class="wicc">WICC</p> -->
           </li>
         </ul>
         <p style="margin: 12px auto;color:#7F8CA3">
@@ -151,7 +166,7 @@
           </div>
           <div class="contractStr">
             <span class="t">Amount</span>
-            <input class="amountInput" v-model="wiccNum" @input="inputSawiNum" />
+            <input class="amountInput" v-model="wiccNum" @keyup="inputHandler" />
             <span class="amountSelect">
               <select @change="inputOption($event)">
                 <option value="WICC">WICC</option>
@@ -350,7 +365,9 @@ export default {
       GetContractValue: "",
       wiccType: "",
       inputBox: "WICC",
-      balance: 0, //余额
+      balanceWICC: 0, //余额
+      balanceWUSD: 0, //余额
+      balanceWGRT: 0, //余额
       GetcontractadataKey: localStorage.getItem("GetcontractadataKey")
         ? localStorage.getItem("GetcontractadataKey")
         : "",
@@ -407,13 +424,16 @@ export default {
       }
       this.inputBox = ev.target.value.replace(/[^A-Z]/, "");
     },
-    inputSawiNum() {
-      let intNum = parseInt(this.wiccNum);
-      if (isNaN(intNum)) {
-        this.wiccNum = "";
-        return;
-      }
-      this.wiccNum = intNum;
+    // inputSawiNum() {
+    //   let intNum =this.wiccNum;
+    //   if (isNaN(intNum)) {
+    //     this.wiccNum = "";
+    //     return;
+    //   }
+    //   this.wiccNum = intNum;
+    // },
+    inputHandler (e) {
+      this.wiccNum = (e.target.value.match(/^(([1-9][0-9]*)|0)(\.\d{0,8})?/g)) || null
     },
     inputOption(ev) {
       var index = ev.target.selectedIndex;
@@ -607,7 +627,7 @@ export default {
         return;
       }
       let url = "";
-      if (this.account.network === "mainnet") {
+      if (this.account.address.substr(0,1) === "W") {
         url = "https://baas.wiccdev.org/v2/api/contract/getcontractdata";
       } else {
         url = "https://baas-test.wiccdev.org/v2/api/contract/getcontractdata";
@@ -641,7 +661,7 @@ export default {
       waykiBridge.walletPlugin(
         "walletPluginUContractInvoke",
         {
-          amount: this.wiccNum?parseInt(this.wiccNum) * Math.pow(10, 8):0,
+          amount: this.wiccNum?(this.wiccNum) * Math.pow(10, 8):0,
           coinSymbol: this.inputBox,
           regId: this.contractRegId,
           contract: this.sampleCode,
@@ -676,6 +696,7 @@ export default {
           {},
           data => {
             //_this.network = data.network;
+            console.log(data)
             _this.account = data.result;
             _this.getAcountBalance();
           },
@@ -761,7 +782,7 @@ export default {
     },
     getContract() {
       let _this = this;
-      if (!_this.account.network) {
+      if (!_this.network) {
         this.login("0");
       } else {
         if (_this.txHash === "") {
@@ -770,7 +791,7 @@ export default {
             "Please get the contract deployment transaction hash first"
           );
         } else {
-          if (_this.account.network === "mainnet") {
+          if (_this.network === "mainnet") {
             _this.reAPI = "https://baas.wiccdev.org/v1/api/contract/regid";
           } else {
             _this.reAPI = "https://baas-test.wiccdev.org/v1/api/contract/regid";
@@ -818,6 +839,11 @@ export default {
             "Yes",
             "Deploy contract txhash: " + this.txHash
           );
+          this.$emit(
+            "errorLog",
+            "Yes",
+            "Deploy network: " + this.network
+          );
           localStorage.setItem("deployedTxHash", data.result.txid);
         } else {
           this.invokeTxHash = data.result.txid;
@@ -847,9 +873,11 @@ export default {
     },
     getAcountBalance() {
       let url = "";
-      if (this.account.network === "mainnet") {
+      if (this.account.address.substr(0,1) === "W") {
+        this.network='mainnet'
         url = "https://baas.wiccdev.org/v2/api/account/getaccountinfo";
       } else {
+        this.network='testnet'
         url = "https://baas-test.wiccdev.org/v2/api/account/getaccountinfo";
       }
       let para = {
@@ -858,8 +886,13 @@ export default {
       this.$http
         .post(url, para)
         .then(res => {
+          console.log(res.data.data)
           if (res.data.code == 0) {
-            this.balance = parseInt(res.data.data.balance) / 100000000;
+            let tokens = res.data.data.tokens;
+            this.balanceWICC =  tokens.WICC?tokens.WICC.freeAmount/100000000:0;
+            this.balanceWUSD =  tokens.WUSD?tokens.WUSD.freeAmount/100000000:0; 
+            this.balanceWGRT =  tokens.WGRT?tokens.WGRT.freeAmount/100000000:0;             
+
           }
         })
         .catch(err => {
