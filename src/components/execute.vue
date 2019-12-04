@@ -645,7 +645,7 @@ export default {
             this.$emit(
             "errorLog",
             "Yes",
-            "Deploy network: " + this.network
+            "Getcontractadata network: " + this.network
           );
             this.GetContractValue = res.data.data.value;
           } else {
