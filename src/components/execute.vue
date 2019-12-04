@@ -282,7 +282,7 @@
         </div>
       </div>
       <div class="helpItem" style="border:none">
-        <p class="contact" style="font-style:italic">Version: v 2.0.1</p>
+        <p class="contact" style="font-style:italic">Version: v 2.0.2</p>
       </div>
     </div>
 
