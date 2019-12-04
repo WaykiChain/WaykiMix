@@ -633,8 +633,8 @@ export default {
         url = "https://baas-test.wiccdev.org/v2/api/contract/getcontractdata";
       }
       let para = {
-        key: this.GetcontractadataKey,
-        regid: this.contractRegId,
+        key: this.GetcontractadataKey.trim(),
+        regid: this.contractRegId.trim(),
         returndatatype: this.returnType
       };
       this.$http
@@ -642,6 +642,11 @@ export default {
         .then(res => {
           if (res.data.code == 0) {
             this.$emit("errorLog", "Yes", res.data);
+            this.$emit(
+            "errorLog",
+            "Yes",
+            "Deploy network: " + this.network
+          );
             this.GetContractValue = res.data.data.value;
           } else {
             this.$emit("errorLog", res.data);
@@ -663,8 +668,8 @@ export default {
         {
           amount: this.wiccNum?(this.wiccNum) * Math.pow(10, 8):0,
           coinSymbol: this.inputBox,
-          regId: this.contractRegId,
-          contract: this.sampleCode,
+          regId: this.contractRegId.trim(),
+          contract: this.sampleCode.trim(),
           memo: "WaykiMix"
         },
         function(res) {
@@ -796,11 +801,13 @@ export default {
           } else {
             _this.reAPI = "https://baas-test.wiccdev.org/v1/api/contract/regid";
           }
+          console.log(_this.txHash)
           _this.$http
-            .post(_this.reAPI, { hash: _this.txHash })
+            .post(_this.reAPI, { hash: _this.txHash.trim() })
             .then(function(response) {
               let data = response.data;
               if (data.code === 0) {
+                console.log(_this.txHash.trim())
                 if (data.data.result) {
                   _this.contractRegId = data.data.result.regid;
                   _this.ifGetRegId = true;
